@@ -6,6 +6,7 @@ import {
   type ZodTypeProvider,
 } from "fastify-type-provider-zod";
 import { env } from "./env.ts";
+import { getRomsRoute } from "./http/routes/get-roms.ts";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -19,5 +20,7 @@ app.setValidatorCompiler(validatorCompiler);
 app.get("/health", () => {
   return "OK";
 });
+
+app.register(getRomsRoute);
 
 app.listen({ port: env.PORT });

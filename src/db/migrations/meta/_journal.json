@@ -15,6 +15,13 @@
       "when": 1752144702740,
       "tag": "0001_modern_the_stranger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752152384311,
+      "tag": "0002_illegal_wallop",
+      "breakpoints": true
     }
   ]
 }

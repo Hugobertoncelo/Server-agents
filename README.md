@@ -46,7 +46,7 @@ docker-compose up -d
 Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-PORT=3333
+PORT=3000
 DATABASE_URL=postgresql://docker:docker@localhost:5432/agents
 ```
 

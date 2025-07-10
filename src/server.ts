@@ -7,6 +7,8 @@ import {
 } from "fastify-type-provider-zod";
 import { env } from "./env.ts";
 import { getRomsRoute } from "./http/routes/get-roms.ts";
+import { createRoomRoute } from "./http/routes/create-room.ts";
+import { getRoomQuestions } from "./http/routes/get-room-questions.ts";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -22,5 +24,7 @@ app.get("/health", () => {
 });
 
 app.register(getRomsRoute);
+app.register(createRoomRoute);
+app.register(getRoomQuestions);
 
 app.listen({ port: env.PORT });

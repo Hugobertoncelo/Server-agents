@@ -1,11 +1,15 @@
+import dotenv from "dotenv";
+dotenv.config();
+
+import { fastify } from "fastify";
 import { fastifyCors } from "@fastify/cors";
 import { fastifyMultipart } from "@fastify/multipart";
-import { fastify } from "fastify";
 import {
   serializerCompiler,
   validatorCompiler,
   type ZodTypeProvider,
 } from "fastify-type-provider-zod";
+
 import { env } from "./env.ts";
 import { createQuestionRoute } from "./http/routes/create-question.ts";
 import { createRoomRoute } from "./http/routes/create-room.ts";
@@ -21,8 +25,8 @@ app.register(fastifyCors, {
 
 app.register(fastifyMultipart);
 
-app.setSerializerCompiler(serializerCompiler);
 app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
 
 app.get("/health", () => {
   return "OK";
@@ -34,4 +38,14 @@ app.register(getRoomQuestions);
 app.register(createQuestionRoute);
 app.register(uploadAudioRoute);
 
-app.listen({ port: env.PORT });
+const start = async () => {
+  try {
+    await app.listen({ port: env.PORT, host: "0.0.0.0" });
+    // console.log(`🚀 Server is running at http://localhost:${env.PORT}`);
+  } catch (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
+};
+
+start();
